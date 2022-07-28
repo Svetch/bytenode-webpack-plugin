@@ -1,6 +1,8 @@
 @svetch/bytenode-webpack-plugin
 ---
 
+Forked from @herberttn/bytenode-webpack-plugin, fixes some WebPack 5 issue.
+
 [![ci][badge-workflow-ci]][badge-workflow-ci-link]
 [![coveralls][badge-coveralls]][badge-coveralls-link]
 [![npm][badge-npm]][badge-npm-link]
@@ -96,7 +98,7 @@ new BytenodeWebpackPlugin({
       <a href="https://github.com/svetch">
         <img src="https://avatars.githubusercontent.com/u/5903869?v=4" width="120;" alt="svetch"/>
         <br />
-        <sub><b>svetch</b></sub>
+        <sub><b>herberttn</b></sub>
       </a>
     </td>
     <td align="center">
