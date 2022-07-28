@@ -93,7 +93,7 @@ function commonRules() {
     'rest-spread-spacing': ['error', 'never'],
     'semi': 'off', // enhanced by @typescript-eslint
     'semi-style': ['error', 'last'],
-    'sort-imports': ['error', {
+    'sort-imports': ['off', {
       ignoreCase: true,
       ignoreDeclarationSort: true,
       ignoreMemberSort: false,
@@ -154,9 +154,9 @@ function overrideForTypeScriptFiles() {
         ignoreVoid: true,
       }],
       '@typescript-eslint/no-non-null-asserted-optional-chain': 'error',
-      '@typescript-eslint/no-unsafe-assignment': 'error',
-      '@typescript-eslint/no-unsafe-call': 'error',
-      '@typescript-eslint/no-unsafe-member-access': 'error',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
       '@typescript-eslint/no-unsafe-return': 'error',
       '@typescript-eslint/no-use-before-define': 'off',
       '@typescript-eslint/prefer-as-const': 'error',

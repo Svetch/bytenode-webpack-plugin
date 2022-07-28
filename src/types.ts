@@ -4,7 +4,6 @@ interface Options {
   debugLifecycle: boolean;
   debugLogs: boolean;
   keepSource: boolean;
-  preventSourceMaps: boolean;
   silent: boolean;
 }
 
@@ -38,7 +37,6 @@ interface ProcessedOptions {
   entry: Record<string, any>;
   entryLoaders: string[];
   externals: string[];
-  output: PreprocessedOutput;
   virtualModules: Record<string, string>;
 }
 
