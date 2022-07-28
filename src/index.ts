@@ -33,7 +33,6 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
   }
 
   apply(compiler: Compiler): void {
-
     this.debug('original options', {
       context: compiler.options.context,
       devtool: compiler.options.devtool,
@@ -51,6 +50,10 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
       outputs,
       virtualModules,
     });
+    if (typeof compiler.options.output.filename === 'string') {
+      compiler.options.output.filename = '[name].js';
+    }
+
     compiler.options.entry = entry;
 
     // @ts-ignore: The plugin supports string[] but the type doesn't
@@ -126,7 +129,7 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
     const virtualModules: [string, string][] = [];
 
     for (const { entry, compiled, loader } of this.preprocessEntry(options)) {
-      const entryName = entry.name;
+      const entryName = typeof options.output.filename === 'string' ? prepare(options.context, options.output.filename).name : entry.name;
 
       entries.push([entryName, { import: loader.locations.map(e => e.location) }]);
       entryLoaders.push(entryName);
