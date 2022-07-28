@@ -1,4 +1,4 @@
-@herberttn/bytenode-webpack-plugin
+@svetch/bytenode-webpack-plugin
 ---
 
 [![ci][badge-workflow-ci]][badge-workflow-ci-link]
@@ -6,14 +6,14 @@
 [![npm][badge-npm]][badge-npm-link]
 [![license][badge-license]][badge-license-link]
 
-[badge-coveralls]: https://img.shields.io/coveralls/github/herberttn/bytenode-webpack-plugin?logo=coveralls&style=flat-square
-[badge-coveralls-link]: https://coveralls.io/github/herberttn/bytenode-webpack-plugin
-[badge-license]: https://img.shields.io/github/license/herberttn/bytenode-webpack-plugin?style=flat-square
+[badge-coveralls]: https://img.shields.io/coveralls/github/svetch/bytenode-webpack-plugin?logo=coveralls&style=flat-square
+[badge-coveralls-link]: https://coveralls.io/github/svetch/bytenode-webpack-plugin
+[badge-license]: https://img.shields.io/github/license/svetch/bytenode-webpack-plugin?style=flat-square
 [badge-license-link]: LICENSE
-[badge-npm]: https://img.shields.io/npm/v/@herberttn/bytenode-webpack-plugin?logo=npm&style=flat-square
-[badge-npm-link]: https://www.npmjs.com/package/@herberttn/bytenode-webpack-plugin
-[badge-workflow-ci]: https://img.shields.io/github/workflow/status/herberttn/bytenode-webpack-plugin/ci?label=ci&logo=github&style=flat-square
-[badge-workflow-ci-link]: https://github.com/herberttn/bytenode-webpack-plugin/actions/workflows/ci.yml
+[badge-npm]: https://img.shields.io/npm/v/@svetch/bytenode-webpack-plugin?logo=npm&style=flat-square
+[badge-npm-link]: https://www.npmjs.com/package/@svetch/bytenode-webpack-plugin
+[badge-workflow-ci]: https://img.shields.io/github/workflow/status/svetch/bytenode-webpack-plugin/ci?label=ci&logo=github&style=flat-square
+[badge-workflow-ci-link]: https://github.com/svetch/bytenode-webpack-plugin/actions/workflows/ci.yml
 
 Compile JavaScript into bytecode using [`bytenode`][link-to-bytenode].  
 Inspired by [`bytenode-webpack-plugin`][link-to-bytenode-webpack-plugin].
@@ -23,7 +23,7 @@ Inspired by [`bytenode-webpack-plugin`][link-to-bytenode-webpack-plugin].
 
 ### Install
 ```shell
-npm install --save @herberttn/bytenode-webpack-plugin
+npm install --save @svetch/bytenode-webpack-plugin
 ```
 
 ### Supports
@@ -44,7 +44,7 @@ npm install --save @herberttn/bytenode-webpack-plugin
 
 ### Usage
 ```javascript
-import { BytenodeWebpackPlugin } from '@herberttn/bytenode-webpack-plugin';
+import { BytenodeWebpackPlugin } from '@svetch/bytenode-webpack-plugin';
 
 // webpack options
 module.exports = {
@@ -93,10 +93,10 @@ new BytenodeWebpackPlugin({
 <table>
   <tr>
     <td align="center">
-      <a href="https://github.com/herberttn">
-        <img src="https://avatars.githubusercontent.com/u/5903869?v=4" width="120;" alt="herberttn"/>
+      <a href="https://github.com/svetch">
+        <img src="https://avatars.githubusercontent.com/u/5903869?v=4" width="120;" alt="svetch"/>
         <br />
-        <sub><b>herberttn</b></sub>
+        <sub><b>svetch</b></sub>
       </a>
     </td>
     <td align="center">
