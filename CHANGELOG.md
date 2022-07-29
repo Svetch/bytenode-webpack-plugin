@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/svetch/bytenode-webpack-plugin/compare/v1.2.5...v1.2.6) (2022-07-29)
+
+
+### Bug Fixes
+
+* remove test files ([b8d2811](https://github.com/svetch/bytenode-webpack-plugin/commit/b8d2811c53d688867178e49bd58814d5db069c69))
+
 ## [1.2.5](https://github.com/herberttn/bytenode-webpack-plugin/compare/v1.2.4...v1.2.5) (2021-04-24)
 
 
