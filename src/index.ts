@@ -177,16 +177,18 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
   preprocessOutput({ context, output }: WebpackOptionsNormalized): PreprocessedOutput {
     let filename = output?.filename ?? '[name].js';
     if (typeof filename !== 'string') {
-      (filename as any) = undefined;
+      return {
+        dynamic: false,
+        extension: '',
+        filename: undefined,
+        name: undefined,
+        of: name => ('').replace('[name]', name),
+      };
     }
-    if (filename) filename = (filename as string);
 
     const dynamic = /.*[[\]]+.*/.test(filename);
     const { extension, name } = prepare(context, filename);
-    if (filename) {
-      filename = dynamic ? filename : '[name]' + extension;
-    }
-
+    filename = dynamic ? filename : '[name]' + extension;
     return {
       dynamic,
       extension,

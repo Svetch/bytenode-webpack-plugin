@@ -27,7 +27,7 @@ interface PreprocessedEntry {
 interface PreprocessedOutput {
   dynamic: boolean;
   extension: string;
-  filename: string;
+  filename: string | undefined;
   name?: string;
 
   of(name: string): string;
