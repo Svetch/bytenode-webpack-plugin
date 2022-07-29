@@ -43,18 +43,17 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
       return prepare(compiler.options.context, name + '.js');
     });
 
-    const { entry, entryLoaders, externals, virtualModules } = this.processOptions(compiler.options, outputs);
+    const { entry, entryLoaders, externals, virtualModules, output } = this.processOptions(compiler.options, outputs);
     this.debug('processed options', {
       entry,
       entryLoaders,
       outputs,
       virtualModules,
     });
-    if (typeof compiler.options.output.filename === 'string') {
-      compiler.options.output.filename = '[name].js';
-    }
-
     compiler.options.entry = entry;
+    if (output.filename) {
+      compiler.options.output.filename = output.filename;
+    }
 
     // @ts-ignore: The plugin supports string[] but the type doesn't
     new ExternalsPlugin('commonjs', externals)
@@ -91,7 +90,6 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
 
         for (const [name, asset] of Object.entries(assets as Record<string, Source>)) {
           this.debug('emitting', name);
-
           if (!shouldCompile(name)) {
             continue;
           }
@@ -122,14 +120,14 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
   }
 
   processOptions(options: WebpackOptionsNormalized, outputs: Prepared[]): ProcessedOptions {
-
+    const projectOutput = this.preprocessOutput(options);
     const entries: [string, string | string[] | any][] = [];
     const entryLoaders: string[] = [];
     const externals: string[] = [];
     const virtualModules: [string, string][] = [];
 
     for (const { entry, compiled, loader } of this.preprocessEntry(options)) {
-      const entryName = typeof options.output.filename === 'string' ? prepare(options.context, options.output.filename).name : entry.name;
+      const entryName = projectOutput.name ?? entry.name;
 
       entries.push([entryName, { import: loader.locations.map(e => e.location) }]);
       entryLoaders.push(entryName);
@@ -143,14 +141,18 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
       const from = entryName + output.extension;
       const to = name + output.extension;
 
-      let relativeImportPath = toRelativeImportPath(options?.output?.path || '', from, to);
+      let relativeImportPath = toRelativeImportPath(options.output.path || '', from, to);
+
+      /* if (options.target === 'electron-renderer' && options.mode === 'development') {
+        relativeImportPath = path.resolve(options.output.path ?? '', 'renderer', relativeImportPath);
+      } */
 
       // Use absolute path to load the compiled file in dev mode due to how electron-forge handles
       // the renderer process code loading (by using a server and not directly from the file system).
       // This should be safe exactly because it will only be used in dev mode, so the app code will
       // never be relocated after compiling with webpack and before starting electron.
       if (options.target === 'electron-renderer' && options.mode === 'development') {
-        relativeImportPath = path.resolve(options?.output?.path || '', 'renderer', relativeImportPath);
+        relativeImportPath = path.resolve(options?.output?.path || '', relativeImportPath);
       }
 
       entries.push([name, { import: entry.locations.map(e => e.location) }]);
@@ -167,28 +169,30 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
       entry: Object.fromEntries(entries),
       entryLoaders,
       externals,
+      output: projectOutput,
       virtualModules: Object.fromEntries(virtualModules),
     };
   }
 
-  preprocessOutput({ context }: WebpackOptionsNormalized, filename: string): PreprocessedOutput {
-    /*     let filename: string;
-    
-        if (typeof output?.filename == 'function') {
-          filename = output?.filename(chunk);
-        } else filename = output?.filename ?? '[name].js';
-     */
-    const { extension, name } = prepare(context, filename);
-    const dynamic = /.*[[\]]+.*/.test(filename);
+  preprocessOutput({ context, output }: WebpackOptionsNormalized): PreprocessedOutput {
+    let filename = output?.filename ?? '[name].js';
+    if (typeof filename !== 'string') {
+      (filename as any) = undefined;
+    }
+    if (filename) filename = (filename as string);
 
-    filename = dynamic ? filename : '[name]' + extension;
+    const dynamic = /.*[[\]]+.*/.test(filename);
+    const { extension, name } = prepare(context, filename);
+    if (filename) {
+      filename = dynamic ? filename : '[name]' + extension;
+    }
 
     return {
       dynamic,
       extension,
       filename,
       name: dynamic ? undefined : name,
-      of: name => filename.replace('[name]', name),
+      of: name => (filename as string || '').replace('[name]', name),
     };
   }
 
