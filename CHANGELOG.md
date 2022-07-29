@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/svetch/bytenode-webpack-plugin/compare/v1.2.7...v1.2.8) (2022-07-29)
+
+
+### Bug Fixes
+
+* issue with electron forge renderer import path ([0ceeafd](https://github.com/svetch/bytenode-webpack-plugin/commit/0ceeafd6f765bd1aa518ee93291df6a8e806e27e))
+
 ## [1.2.7](https://github.com/svetch/bytenode-webpack-plugin/compare/v1.2.6...v1.2.7) (2022-07-29)
 
 
