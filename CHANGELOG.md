@@ -1,3 +1,11 @@
+## [1.2.9](https://github.com/svetch/bytenode-webpack-plugin/compare/v1.2.8...v1.2.9) (2022-07-29)
+
+
+### Bug Fixes
+
+* electron renderer production renderer path issue ([0e40e37](https://github.com/svetch/bytenode-webpack-plugin/commit/0e40e37c16f567cc6484fc67299184f24fab225d))
+* handle undefined output filename if is function ([8210c06](https://github.com/svetch/bytenode-webpack-plugin/commit/8210c06da7fd01a5692d25d06759ed7ecdf60ebc))
+
 ## [1.2.8](https://github.com/svetch/bytenode-webpack-plugin/compare/v1.2.7...v1.2.8) (2022-07-29)
 
 
