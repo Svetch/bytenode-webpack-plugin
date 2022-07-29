@@ -143,16 +143,12 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
 
       let relativeImportPath = toRelativeImportPath(options.output.path || '', from, to);
 
-      /* if (options.target === 'electron-renderer' && options.mode === 'development') {
-        relativeImportPath = path.resolve(options.output.path ?? '', 'renderer', relativeImportPath);
-      } */
-
       // Use absolute path to load the compiled file in dev mode due to how electron-forge handles
       // the renderer process code loading (by using a server and not directly from the file system).
       // This should be safe exactly because it will only be used in dev mode, so the app code will
       // never be relocated after compiling with webpack and before starting electron.
       if (options.target === 'electron-renderer' && options.mode === 'development') {
-        relativeImportPath = path.resolve(options?.output?.path || '', relativeImportPath);
+        relativeImportPath = path.resolve(options?.output?.path || '', 'renderer', relativeImportPath);
       }
 
       entries.push([name, { import: entry.locations.map(e => e.location) }]);
