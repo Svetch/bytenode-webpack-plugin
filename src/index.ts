@@ -138,8 +138,8 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
         return o.name == entry.name;
       });
       if (!output) throw new Error('Entry not found!');
-      const from = entryName + output.extension;
-      const to = name + output.extension;
+      const from = projectOutput.filename ? projectOutput.of(entryName) : entryName + output.extension;
+      const to = projectOutput.filename ? projectOutput.of(name) : name + output.extension;
 
       let relativeImportPath = toRelativeImportPath(options.output.path || '', from, to);
 
